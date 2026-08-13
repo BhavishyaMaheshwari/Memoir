@@ -1,43 +1,45 @@
-# ✦ Memoir
+# Memoir
 
 <p align="center">
   <strong>Local-First, Privacy-First AI Photo Management & Semantic Search</strong>
 </p>
 
 <p align="center">
+  <a href="#overview">Overview</a> •
   <a href="#key-features">Key Features</a> •
-  <a href="#system-architecture">Architecture</a> •
+  <a href="#system-architecture">System Architecture</a> •
   <a href="#tech-stack">Tech Stack</a> •
   <a href="#getting-started">Getting Started</a> •
-  <a href="#configuration">Configuration</a> •
-  <a href="#api-reference">API Reference</a>
+  <a href="#configuration-and-storage">Configuration & Storage</a> •
+  <a href="#api-reference">API Reference</a> •
+  <a href="#project-structure">Project Structure</a>
 </p>
 
 ---
 
-## 📸 Overview
+## Overview
 
-**Memoir** is an open-source, local-first photo management application designed to organize, search, and relive your memories with zero compromise on privacy. 
+**Memoir** is an open-source, local-first photo management application designed to organize, search, and relive your memories with zero compromise on privacy.
 
-Unlike cloud photo services, Memoir processes everything locally on your machine. Using state-of-the-art vision models (**SigLIP**) and local vector storage (**LanceDB**), Memoir enables deep semantic natural language search across your photo library—without sending a single byte to the cloud.
+Unlike cloud photo services, Memoir processes everything locally on your machine. Using state-of-the-art vision models (**SigLIP**) and local vector storage (**LanceDB**), Memoir enables deep semantic natural language search across your photo library without sending any data to external servers.
 
 > **Privacy Guarantee**: No cloud API calls. No analytics. No telemetry. No ads. Your memories stay strictly on your device.
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- 🔍 **Semantic Natural Language Search**: Search for photos using descriptive phrases like *"sunset over snowy mountains"*, *"dog playing with ball in grass"*, or *"coffee on wooden table"*. Powered by SigLIP visual embeddings.
-- 🔒 **100% Local & Offline**: All indexing, vector generation, database operations, and thumbnail generation run locally on your system.
-- 👤 **Face Recognition & People Tagging**: Automatically detects faces, groups recurring individuals, and allows personalized name tagging.
-- ✈️ **Smart Trips & Location Highlights**: Intelligent spatial and temporal clustering groups your photos into memorable trips and location highlights.
-- ⚡ **High-Performance Virtualized Grid**: Smooth rendering of thousands of high-resolution images using `@tanstack/react-virtual` and Framer Motion micro-animations.
-- 📷 **Extensive Format Support**: Native support for JPEG, PNG, WebP, GIF, TIFF, BMP, RAW camera files (`.cr2`, `.nef`, `.arw`, `.dng`), and Apple HEIC/HEIF photos.
-- 📁 **Live File System Sync**: Real-time directory monitoring powered by `watchdog` automatically indexes new photos as they are added to your folders.
+- **Semantic Natural Language Search**: Search for photos using descriptive phrases like *"sunset over snowy mountains"*, *"dog playing with ball in grass"*, or *"coffee on wooden table"*. Powered by SigLIP visual embeddings.
+- **100% Local & Offline**: All indexing, vector generation, database operations, and thumbnail generation run locally on your system.
+- **Face Recognition & People Tagging**: Automatically detects faces, groups recurring individuals, and allows personalized name tagging.
+- **Smart Trips & Location Highlights**: Intelligent spatial and temporal clustering groups your photos into memorable trips and location highlights.
+- **High-Performance Virtualized Grid**: Smooth rendering of thousands of high-resolution images using `@tanstack/react-virtual` and Framer Motion micro-animations.
+- **Extensive Format Support**: Native support for JPEG, PNG, WebP, GIF, TIFF, BMP, RAW camera files (`.cr2`, `.nef`, `.arw`, `.dng`), and Apple HEIC/HEIF photos.
+- **Live File System Sync**: Real-time directory monitoring powered by `watchdog` automatically indexes new photos as they are added to your folders.
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 graph TD
@@ -65,28 +67,28 @@ graph TD
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-### **Frontend**
+### Frontend
 - **Framework**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool**: [Vite 8](https://vitejs.dev/)
+- **Build Tool**: [Vite](https://vite.dev/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand)
 - **Virtualization**: [TanStack Virtual](https://tanstack.com/virtual/latest)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Animations**: [Framer Motion](https://motion.dev/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 
-### **Backend**
+### Backend
 - **API Framework**: [FastAPI](https://fastapi.tiangolo.com/) (Python 3.10+)
 - **AI Embeddings**: [Transformers](https://huggingface.co/docs/transformers/index) + [PyTorch](https://pytorch.org/) (`google/siglip-base-patch16-224`)
 - **Vector Search Engine**: [LanceDB](https://lancedb.com/)
 - **Metadata Storage**: [aiosqlite](https://github.com/omnilib/aiosqlite)
-- **Image Processing**: Pillow + `pillow-heif`
-- **File System Watcher**: Watchdog
+- **Image Processing**: [Pillow](https://python-pillow.org/) + [pillow-heif](https://github.com/bigcat88/pillow_heif)
+- **File System Watcher**: [Watchdog](https://github.com/gorakhargosh/watchdog)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -148,7 +150,7 @@ cd memoir
 
 ---
 
-## ⚙️ Configuration & Storage
+## Configuration and Storage
 
 Memoir stores all metadata, generated thumbnails, and vector index embeddings locally under your user home directory:
 
@@ -172,21 +174,21 @@ You can customize backend behavior using `MEMOIR_` prefixed environment variable
 
 ---
 
-## 🔌 API Reference Summary
+## API Reference
 
 The backend exposes interactive OpenAPI docs at `http://localhost:8484/api/docs` when running in debug mode.
 
 | Endpoint | Method | Description |
 | :--- | :--- | :--- |
-| `GET /api/health` | `GET` | Health check & photo counts |
-| `GET /api/photos` | `GET` | List photos with pagination & sorting |
+| `GET /api/health` | `GET` | Health check and photo counts |
+| `GET /api/photos` | `GET` | List photos with pagination and sorting |
 | `POST /api/search` | `POST` | Execute natural language vector search |
-| `POST /api/indexing/scan` | `POST` | Trigger directory scan & indexing |
-| `GET /api/people` | `GET` | Retrieve detected people & face clusters |
+| `POST /api/indexing/scan` | `POST` | Trigger directory scan and indexing |
+| `GET /api/people` | `GET` | Retrieve detected people and face clusters |
 
 ---
 
-## 🗺️ Project Structure
+## Project Structure
 
 ```text
 Memoir/
@@ -207,9 +209,3 @@ Memoir/
 ├── package.json
 └── README.md
 ```
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
