@@ -1,0 +1,29 @@
+# Memoir Backend Dependencies
+# ═══════════════════════════════════════════════════
+
+# Core
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+python-multipart==0.0.20
+
+# Database
+aiosqlite==0.21.0
+
+# Image Processing
+Pillow==11.2.1
+pillow-heif==0.22.0
+
+# AI - Embeddings (SigLIP)
+transformers==4.51.3
+torch==2.7.0
+torchvision==0.22.0
+
+# AI - Vector Storage
+lancedb==0.20.0
+pyarrow==19.0.1
+
+# Utilities
+pydantic==2.11.2
+pydantic-settings==2.9.1
+watchdog==6.0.0
+xxhash==3.5.0

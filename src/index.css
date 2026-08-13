@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   MEMOIR — Design System
+   Cinematic minimalism · Deep graphite · Spatial depth
+   ═══════════════════════════════════════════════════════════ */
+
+@theme {
+  /* — Surface Colors — */
+  --color-surface-base: #fcfcfd;
+  --color-surface-raised: #f4f4f5;
+  --color-surface-overlay: #ffffff;
+  --color-surface-modal: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  --color-surface-active: #e4e4e7;
+
+  /* — Border Colors — */
+  --color-border-subtle: rgba(0, 0, 0, 0.05);
+  --color-border-default: rgba(0, 0, 0, 0.1);
+  --color-border-focus: rgba(0, 0, 0, 0.2);
+
+  /* — Text Colors — */
+  --color-text-primary: #18181b;
+  --color-text-secondary: #52525b;
+  --color-text-tertiary: #a1a1aa;
+  --color-text-accent: #5c7285;
+
+  /* — Accent (Muted Blue-Grey) — */
+  --color-accent: #5c7285;
+  --color-accent-hover: #485c6d;
+  --color-accent-subtle: rgba(92, 114, 133, 0.12);
+  --color-accent-glow: rgba(92, 114, 133, 0.2);
+
+  /* — Semantic Colors — */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  /* — Shadows — */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 24px rgba(92, 114, 133, 0.15);
+
+  /* — Typography — */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  /* — Spacing — */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* — Radius — */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* — Transitions — */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* — Z-Index — */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-overlay: 100;
+  --z-modal: 200;
+  --z-command: 300;
+  --z-lightbox: 400;
+}
+
+/* ─── Base Styles ─── */
+
+html {
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-surface-base);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ─── Scrollbar Styling ─── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ─── Selection ─── */
+
+::selection {
+  background: var(--color-accent-subtle);
+  color: var(--color-text-primary);
+}
+
+/* ─── Focus Ring ─── */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Glass Effect ─── */
+
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.glass-heavy {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(40px) saturate(1.6);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
+  border: 1px solid var(--color-border-subtle);
+}
+
+/* ─── Shimmer Loading ─── */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-raised) 25%,
+    var(--color-surface-overlay) 50%,
+    var(--color-surface-raised) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite ease-in-out;
+}
+
+/* ─── Photo Grid Masonry Helpers ─── */
+
+.photo-thumbnail {
+  transition: opacity 0.2s var(--ease-smooth);
+}
+
+.photo-thumbnail:hover {
+  opacity: 0.9;
+}
+
+/* ─── Cinematic Fade ─── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s var(--ease-out) forwards;
+}
+
+/* ─── Drag Region (for Tauri later) ─── */
+
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
